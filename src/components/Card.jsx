@@ -19,9 +19,9 @@ const Card = ({ country }) => {
           />
         </div>
         <div className="px-6 pt-6 pb-12">
-          <h3 className="mb-5 text-xl font-extrabold dark:text-white md:text-2xl">
+          <p className="mb-5 text-xl font-extrabold dark:text-white md:text-2xl">
             {name}
-          </h3>
+          </p>
           <p className="text-lg">
             <span className="font-bold dark:text-white">Population:</span>
             <span className="text-gray-600 dark:text-gray-100">

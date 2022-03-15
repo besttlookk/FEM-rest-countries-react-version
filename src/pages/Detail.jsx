@@ -67,7 +67,7 @@ const Detail = () => {
               />
             </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <p className="text-xl font-extrabold col-span-full dark:text-white">
+              <p className="text-xl font-extrabold col-span-full dark:text-white md:2xl">
                 {detail.name}
               </p>
               <div className="flex flex-col space-y-2">
