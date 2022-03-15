@@ -14,13 +14,18 @@ const Header = () => {
           Where in the world?
         </h1>
         <div>
-          <i className="fa fa-moon dark:text-white" id="theme-icon"></i>
+          <i
+            className={`fa fa-${
+              theme === "dark" ? "sun" : "moon"
+            } dark:text-white`}
+            id="theme-icon"
+          ></i>
           <span
             className="ml-2 cursor-pointer text-lm-text dark:text-dm-text "
             id="theme-toggle"
             onClick={handleTheme}
           >
-            Dark mode
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </span>
         </div>
       </div>

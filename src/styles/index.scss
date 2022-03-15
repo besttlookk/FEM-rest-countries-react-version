@@ -366,6 +366,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 [hidden] {
   display: none;
 }
+  body {
+    min-height: 100vh;
+  }
 
 *, ::before, ::after {
   --tw-translate-x: 0;
@@ -524,6 +527,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-64 {
   height: 16rem;
+}
+.min-h-screen {
+  min-height: 100vh;
 }
 .w-full {
   width: 100%;

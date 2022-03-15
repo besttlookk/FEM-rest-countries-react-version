@@ -55,7 +55,7 @@ const Home = () => {
       </div>
       <section className="p-10 md:px-0">
         <div
-          className="grid grid-cols-1 gap-12 card-container sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-12 card-container sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
           id="card-container"
         >
           {loading ? (
