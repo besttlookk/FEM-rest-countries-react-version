@@ -6,7 +6,7 @@ import Detail from "./pages/Detail";
 
 function App() {
   return (
-    <div class="bg-lm-bg dark:bg-dm-bg min-h-screen ">
+    <div className="min-h-screen bg-lm-bg dark:bg-dm-bg ">
       <Header />
       <main className="p-6 mx-auto max-w-7xl ">
         <Routes>

@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ country }) => {
-  const { name, population, region, capital, flags } = country;
+  const { name, population, region, capital, flags, alpha3Code } = country;
 
   return (
     <Link
-      to={`/detail?country=${name}`}
+      to={`/detail?country=${alpha3Code}`}
       className="block overflow-hidden transform bg-white rounded-md cursor-pointer shadow-around dark:bg-dm-secondary hover:scale-105"
     >
       {" "}

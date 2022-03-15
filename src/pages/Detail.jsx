@@ -12,18 +12,18 @@ const Detail = () => {
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const countryName = query.get("country");
+  const countryAlpha = query.get("country");
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await api(`name/${countryName}`);
-      setCountry(data);
+      const { data } = await api(`alpha/${countryAlpha}`);
+      setCountry([data]);
       setLoading(false);
-      setBorderCountriesCode(data[0].borders);
+      setBorderCountriesCode(data.borders);
     };
 
     fetchData();
-  }, [countryName]);
+  }, [countryAlpha]);
 
   useEffect(() => {
     setBorderLoading(true);
