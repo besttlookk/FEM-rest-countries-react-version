@@ -26,7 +26,7 @@ const Search = ({
     >
       <i className="absolute text-xl text-gray-400 transform fas fa-magnifying-glass top-2/4 left-10 -translate-y-2/4"></i>
       <input
-        className="inline-block w-full h-full py-2 pl-24 pr-4 outline-none dark:bg-dm-secondary"
+        className="inline-block w-full h-full py-2 pl-24 pr-12 outline-none dark:bg-dm-secondary dark:text-white"
         type="text"
         name="input"
         id="input"
@@ -34,6 +34,11 @@ const Search = ({
         value={searchInput}
         onChange={handleChange}
       />
+      <i
+        className={`absolute text-lg text-gray-400 transform fas fa-xmark top-2/4 right-5 -translate-y-2/4 cursor-pointer  hover:scale-105 active:scale-95 `}
+        onClick={() => setSearchInput("")}
+        style={{ display: searchInput ? "block" : "none" }}
+      ></i>
     </form>
   );
 };

@@ -473,6 +473,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .left-10 {
   left: 2.5rem;
 }
+.right-5 {
+  right: 1.25rem;
+}
 .top-0 {
   top: 0px;
 }
@@ -644,8 +647,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-24 {
   padding-left: 6rem;
 }
-.pr-4 {
-  padding-right: 1rem;
+.pr-12 {
+  padding-right: 3rem;
 }
 .text-xl {
   font-size: 1.25rem;
@@ -664,6 +667,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .font-bold {
   font-weight: 700;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .text-gray-600 {
   --tw-text-opacity: 1;
@@ -705,6 +711,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .active\:translate-y-px:active {
   --tw-translate-y: 1px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.active\:scale-95:active {
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .dark .dark\:bg-dm-bg {

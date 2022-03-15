@@ -66,6 +66,11 @@ const Home = () => {
             ))
           )}
         </div>
+        {!loading && filteredCountries.length === 0 && (
+          <p className="text-2xl font-semibold dark:text-white text-lm-text">
+            No Result Found. Try Again!
+          </p>
+        )}
       </section>
     </>
   );
