@@ -15,6 +15,7 @@ const Detail = () => {
   const countryAlpha = query.get("country");
 
   useEffect(() => {
+    setBorderCountries([]);
     const fetchData = async () => {
       const { data } = await api(`alpha/${countryAlpha}`);
       setCountry([data]);
@@ -149,9 +150,9 @@ const Detail = () => {
                   {!borderLoading &&
                     borderCountries.map((country) => (
                       <Link
-                        to={`/detail?country=${country.name}`}
+                        to={`/detail?country=${country.alpha3Code}`}
                         className="px-6 py-2 text-gray-700 transform rounded-md cursor-pointer shadow-around hover:scale-105 active:translate-y-px dark:text-white dark:bg-dm-secondary"
-                        key={country.alpha3Code}
+                        key={country.alpha2Code}
                       >
                         <p>{country.name}</p>
                       </Link>
