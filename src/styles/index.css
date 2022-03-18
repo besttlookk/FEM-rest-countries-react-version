@@ -416,8 +416,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .filter {
     width: 280px;
-
-    &__field {
+  }
+.filter__field {
       background-color: white;
       display: flex;
       align-items: center;
@@ -429,8 +429,7 @@ Ensure the default browser behavior of the `hidden` attribute.
       font-size: 14px;
       cursor: pointer;
     }
-
-    &__list {
+.filter__list {
       display: block;
       width: 100%;
       margin-top: 10px;
@@ -438,26 +437,21 @@ Ensure the default browser behavior of the `hidden` attribute.
       padding: 10px 0;
       box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.05);
       background-color: white;
-
-      &.hide {
+    }
+.filter__list.hide {
         display: none;
       }
-    }
-
-    &__option {
+.filter__option {
       padding: 5px 28px;
       font-size: 14px;
       cursor: pointer;
-
-      &:hover {
+    }
+.filter__option:hover {
         background-color: hsl(0, 0%, 98%);
       }
-
-      &:active {
+.filter__option:active {
         transform: translateY(1px);
       }
-    }
-  }
 .absolute {
   position: absolute;
 }
@@ -638,6 +632,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
 .pt-6 {
   padding-top: 1.5rem;
 }
@@ -649,6 +651,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pr-12 {
   padding-right: 3rem;
+}
+.font-primary {
+  font-family: Nunito Sans, sans-serif;
 }
 .text-xl {
   font-size: 1.25rem;

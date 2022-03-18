@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <>
       {/* ROW1 : SEARCH + FILTER */}
-      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0">
+      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0 font-primary">
         <Search
           searchInput={searchInput}
           setSearchInput={setSearchInput}
@@ -53,7 +53,7 @@ const Home = () => {
         />
         <Filter setOption={setOption} />
       </div>
-      <section className="p-10 md:px-0">
+      <section className="px-0 py-10 md:px-0">
         <div
           className="grid grid-cols-1 gap-12 card-container sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 "
           id="card-container"

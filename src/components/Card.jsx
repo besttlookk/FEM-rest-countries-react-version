@@ -18,7 +18,7 @@ const Card = ({ country }) => {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="px-6 pt-6 pb-12">
+        <div className="px-6 pt-6 pb-12 font-primary">
           <p className="mb-5 text-xl font-extrabold dark:text-white md:text-2xl">
             {name}
           </p>
