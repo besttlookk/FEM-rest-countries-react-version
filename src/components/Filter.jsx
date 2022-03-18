@@ -38,7 +38,7 @@ const Filter = ({ setOption }) => {
       >
         <li className="filter__option">All</li>
         <li className="filter__option">Africa</li>
-        <li className="filter__option">America</li>
+        <li className="filter__option">Americas</li>
         <li className="filter__option">Asia</li>
         <li className="filter__option">Europe</li>
         <li className="filter__option">Oceania</li>
