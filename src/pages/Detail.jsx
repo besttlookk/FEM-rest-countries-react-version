@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import api from "../axios";
 import { Loader } from "../components";
+import { getAllCountries, getCountryDetail } from "../helpers/api-utils";
 
 const Detail = () => {
   const [loading, setLoading] = useState(true);
   const [country, setCountry] = useState([]);
-  const [borderCountriesCode, setBorderCountriesCode] = useState([]);
   const [borderCountries, setBorderCountries] = useState([]);
-  const [borderLoading, setBorderLoading] = useState(false);
+  const [languages, setLanguages] = useState([]);
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -16,26 +16,36 @@ const Detail = () => {
 
   useEffect(() => {
     setBorderCountries([]);
-    const fetchData = async () => {
-      const { data } = await api(`alpha/${countryAlpha}`);
-      setCountry([data]);
+
+    async function fetchData() {
+      const [countryDetail, countriesArr] = await Promise.all([
+        getCountryDetail(countryAlpha),
+        getAllCountries(),
+      ]);
+
+      setCountry([countryDetail]);
+
+      const languagesArr = countryDetail.languages.map((item) => {
+        return item.name;
+      });
+
+      setLanguages(languagesArr);
+
+      const borderCodeArr = countryDetail.borders;
+      if (borderCodeArr) {
+        const borderCountryArr = countriesArr.filter((country) =>
+          borderCodeArr.includes(country.alpha3Code)
+        );
+
+        setBorderCountries(borderCountryArr);
+      } else {
+        setBorderCountries([]);
+      }
       setLoading(false);
-      setBorderCountriesCode(data.borders);
-    };
+    }
 
     fetchData();
   }, [countryAlpha]);
-
-  useEffect(() => {
-    setBorderLoading(true);
-    borderCountriesCode.forEach((countryCode) => {
-      api(`alpha/${countryCode}`).then(({ data }) => {
-        setBorderCountries((prev) => [...prev, data]);
-      });
-
-      setBorderLoading(false);
-    });
-  }, [borderCountriesCode]);
 
   return (
     <>
@@ -127,7 +137,7 @@ const Detail = () => {
                     Currencies:
                   </span>
                   <span className="text-gray-700 dark:text-gray-100">
-                    {detail.currencies[0].name}
+                    {detail.currencies ? detail.currencies[0].name : ""}
                   </span>
                 </p>
                 <p>
@@ -138,25 +148,27 @@ const Detail = () => {
                     className="text-gray-700 dark:text-gray-100"
                     id="languages"
                   >
-                    {" "}
+                    {languages.length > 0 ? languages.join(", ") : ""}
                   </span>
                 </p>
               </div>
               <div className="col-span-full">
-                <p className="text-xl font-extrabold dark:text-white">
-                  Border Countries{" "}
-                </p>
+                {borderCountries.length > 0 && (
+                  <p className="text-xl font-extrabold dark:text-white">
+                    Border Countries{" "}
+                  </p>
+                )}
+
                 <div className="flex flex-wrap gap-3 mt-3" id="neighbours">
-                  {!borderLoading &&
-                    borderCountries.map((country) => (
-                      <Link
-                        to={`/detail?country=${country.alpha3Code}`}
-                        className="px-6 py-2 text-gray-700 transform rounded-md cursor-pointer shadow-around hover:scale-105 active:translate-y-px dark:text-white dark:bg-dm-secondary"
-                        key={country.alpha2Code}
-                      >
-                        <p>{country.name}</p>
-                      </Link>
-                    ))}
+                  {borderCountries.map((country) => (
+                    <Link
+                      to={`/detail?country=${country.alpha3Code}`}
+                      className="px-6 py-2 text-gray-700 transform rounded-md cursor-pointer shadow-around hover:scale-105 active:translate-y-px dark:text-white dark:bg-dm-secondary"
+                      key={country.alpha2Code}
+                    >
+                      <p>{country.name}</p>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import api from "../axios";
 import { Card, Filter, Search, Loader } from "../components";
+import { getAllCountries } from "../helpers/api-utils";
 
 const Home = () => {
   const [countries, setCountries] = useState([]);
@@ -9,8 +9,9 @@ const Home = () => {
   const [option, setOption] = useState("All");
   const [filteredCountries, setFilteredCountries] = useState([]);
 
+  // Netwrok request to get all country info
   useEffect(() => {
-    api.get("all").then(({ data }) => {
+    getAllCountries().then((data) => {
       setCountries(data);
       setFilteredCountries(data);
       setLoading(false);

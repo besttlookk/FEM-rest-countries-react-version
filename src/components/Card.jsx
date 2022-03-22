@@ -7,7 +7,7 @@ const Card = ({ country }) => {
   return (
     <Link
       to={`/detail?country=${alpha3Code}`}
-      className="block overflow-hidden transform bg-white rounded-md cursor-pointer shadow-around dark:bg-dm-secondary hover:scale-105"
+      className="block overflow-hidden transition duration-500 transform bg-white rounded-md cursor-pointer shadow-around dark:bg-dm-secondary hover:scale-105"
     >
       {" "}
       <>
