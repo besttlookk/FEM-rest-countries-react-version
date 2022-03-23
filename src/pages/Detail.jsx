@@ -39,18 +39,21 @@ const Detail = () => {
       }
     };
 
+    const findLanguages = (country) => {
+      return country.languages.map((item) => {
+        return item.name;
+      });
+    };
+
     async function fetchData() {
       const countryDetail = await getCountryDetail(countryAlpha);
+      const languagesArr = findLanguages(countryDetail);
+
+      setCountry([countryDetail]);
+      setLanguages(languagesArr);
 
       setCountryArr([...countries, countryDetail]);
       setAlphaCodeArr([...alphaCodeArr, countryAlpha]);
-      setCountry([countryDetail]);
-
-      const languagesArr = countryDetail.languages.map((item) => {
-        return item.name;
-      });
-
-      setLanguages(languagesArr);
 
       const borderCountries = finddBorderCountries(countryDetail);
       setBorderCountries(borderCountries);
@@ -68,7 +71,10 @@ const Detail = () => {
       setLoading(false);
 
       const borderCountries = finddBorderCountries(storedDetail);
+      const languagesArr = findLanguages(storedDetail);
+
       setBorderCountries(borderCountries);
+      setLanguages(languagesArr);
     } else {
       fetchData();
     }
