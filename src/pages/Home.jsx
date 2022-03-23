@@ -62,11 +62,13 @@ const Home = () => {
             ))
           )}
         </div>
-        {countries.length === 0 && filteredCountries.length === 0 && (
-          <p className="text-2xl font-semibold dark:text-white text-lm-text">
-            No Result Found. Try Again!
-          </p>
-        )}
+        {!loading &&
+          countries.length === 0 &&
+          filteredCountries.length === 0 && (
+            <p className="text-2xl font-semibold dark:text-white text-lm-text">
+              No Result Found. Try Again!
+            </p>
+          )}
       </section>
     </>
   );
