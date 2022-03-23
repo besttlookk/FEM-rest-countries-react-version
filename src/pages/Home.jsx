@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Card, Filter, Search, Loader } from "../components";
-import { getAllCountries } from "../helpers/api-utils";
+import { AppContext } from "../contexts/appContext";
 
 const Home = () => {
-  const [countries, setCountries] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [searchInput, setSearchInput] = useState("");
   const [option, setOption] = useState("All");
   const [filteredCountries, setFilteredCountries] = useState([]);
 
-  // Netwrok request to get all country info
+  const { countries, loading } = useContext(AppContext);
+
   useEffect(() => {
-    getAllCountries().then((data) => {
-      setCountries(data);
-      setFilteredCountries(data);
-      setLoading(false);
-    });
-  }, []);
+    setFilteredCountries(countries);
+  }, [countries]);
 
   useEffect(() => {
     if (option === "All" && searchInput === "") setFilteredCountries(countries);
@@ -67,7 +62,7 @@ const Home = () => {
             ))
           )}
         </div>
-        {!loading && filteredCountries.length === 0 && (
+        {countries.length === 0 && filteredCountries.length === 0 && (
           <p className="text-2xl font-semibold dark:text-white text-lm-text">
             No Result Found. Try Again!
           </p>

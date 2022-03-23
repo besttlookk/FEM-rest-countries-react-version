@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import api from "../axios";
 import { Loader } from "../components";
-import { getAllCountries, getCountryDetail } from "../helpers/api-utils";
+import { AppContext } from "../contexts/appContext";
+import { getCountryDetail } from "../helpers/api-utils";
 
 const Detail = () => {
   const [loading, setLoading] = useState(true);
@@ -10,19 +10,40 @@ const Detail = () => {
   const [borderCountries, setBorderCountries] = useState([]);
   const [languages, setLanguages] = useState([]);
 
+  //! get queryString from URL
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const countryAlpha = query.get("country");
 
+  // ! Getting list of all country just to find the name of border-countries
+  const {
+    countries,
+    setAlphaCodeArr,
+    setCountryArr,
+    countryArr,
+    alphaCodeArr,
+  } = useContext(AppContext);
+
   useEffect(() => {
     setBorderCountries([]);
 
-    async function fetchData() {
-      const [countryDetail, countriesArr] = await Promise.all([
-        getCountryDetail(countryAlpha),
-        getAllCountries(),
-      ]);
+    const finddBorderCountries = (country) => {
+      const borderCodeArr = country.borders;
+      if (borderCodeArr) {
+        const borderCountryArr = countries.filter((country) =>
+          borderCodeArr.includes(country.alpha3Code)
+        );
+        return borderCountryArr;
+      } else {
+        return [];
+      }
+    };
 
+    async function fetchData() {
+      const countryDetail = await getCountryDetail(countryAlpha);
+
+      setCountryArr([...countries, countryDetail]);
+      setAlphaCodeArr([...alphaCodeArr, countryAlpha]);
       setCountry([countryDetail]);
 
       const languagesArr = countryDetail.languages.map((item) => {
@@ -31,21 +52,34 @@ const Detail = () => {
 
       setLanguages(languagesArr);
 
-      const borderCodeArr = countryDetail.borders;
-      if (borderCodeArr) {
-        const borderCountryArr = countriesArr.filter((country) =>
-          borderCodeArr.includes(country.alpha3Code)
-        );
+      const borderCountries = finddBorderCountries(countryDetail);
+      setBorderCountries(borderCountries);
 
-        setBorderCountries(borderCountryArr);
-      } else {
-        setBorderCountries([]);
-      }
       setLoading(false);
     }
 
-    fetchData();
-  }, [countryAlpha]);
+    const isDeatilDataAvailable = alphaCodeArr.includes(countryAlpha);
+
+    if (isDeatilDataAvailable) {
+      const storedDetail = countryArr.find(
+        (country) => country.alpha3Code === countryAlpha
+      );
+      setCountry([storedDetail]);
+      setLoading(false);
+
+      const borderCountries = finddBorderCountries(storedDetail);
+      setBorderCountries(borderCountries);
+    } else {
+      fetchData();
+    }
+  }, [
+    countryAlpha,
+    countries,
+    alphaCodeArr,
+    countryArr,
+    setAlphaCodeArr,
+    setCountryArr,
+  ]);
 
   return (
     <>
